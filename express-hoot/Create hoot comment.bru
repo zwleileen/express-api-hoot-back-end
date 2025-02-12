@@ -1,0 +1,20 @@
+meta {
+  name: Create hoot comment
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{HOST}}/hoots
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "bbb",
+    "text": "aaa",
+    "category": "Music",
+    "author": "67ac30db72ec77a35d74c18b"
+  }
+}

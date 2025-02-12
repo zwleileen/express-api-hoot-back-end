@@ -11,8 +11,8 @@ module.exports = router;
 
 router.post("/", verifyToken, async (req, res) => {
   try {
-    req.body.author = req.user._id;
-    const hoot = await Hoot.create(req.body);
+    req.body.author = req.user._id; //append user.id to body.author, which updates the form data that will be used to create the resource and ensure logged in user is marked as author
+    const hoot = await Hoot.create(req.body); //req.body based on hootSchema
     hoot._doc.author = req.user;
     res.status(201).json(hoot);
   } catch (err) {
@@ -79,6 +79,27 @@ router.delete("/:hootId", verifyToken, async (req, res) => {
 
     const deletedHoot = await Hoot.findByIdAndDelete(req.params.hootId);
     res.status(200).json(deletedHoot);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+});
+
+// controllers/hoots.js
+
+router.post("/:hootId/comments", verifyToken, async (req, res) => {
+  try {
+    req.body.author = req.user._id;
+    const hoot = await Hoot.findById(req.params.hootId);
+    hoot.comments.push(req.body); //req.body based on commentSchema
+    await hoot.save();
+
+    // Find the newly created comment:
+    const newComment = hoot.comments[hoot.comments.length - 1];
+
+    newComment._doc.author = req.user;
+
+    // Respond with the newComment:
+    res.status(201).json(newComment);
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
