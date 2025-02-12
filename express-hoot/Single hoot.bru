@@ -1,13 +1,17 @@
 meta {
-  name: Create hoot
+  name: Single hoot
   type: http
-  seq: 2
+  seq: 7
 }
 
-post {
-  url: {{HOST}}/hoots
+get {
+  url: {{HOST}}/hoots/:hootId
   body: json
   auth: inherit
+}
+
+params:path {
+  hootId: 67ac31ce72ec77a35d74c18e
 }
 
 body:json {
