@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "express-hoot",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
