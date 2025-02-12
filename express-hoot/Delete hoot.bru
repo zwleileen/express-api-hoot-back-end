@@ -1,0 +1,22 @@
+meta {
+  name: Delete hoot
+  type: http
+  seq: 9
+}
+
+delete {
+  url: {{HOST}}/hoots/:hootId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  hootId: 67ac3dedc9d8be9a67f99797
+}
+
+body:json {
+  {
+    "text": "My updated hoot text!"
+  }
+  
+}

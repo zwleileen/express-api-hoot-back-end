@@ -1,0 +1,22 @@
+meta {
+  name: Update hoot
+  type: http
+  seq: 8
+}
+
+put {
+  url: {{HOST}}/hoots/:hootId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  hootId: 67ac31ce72ec77a35d74c18e
+}
+
+body:json {
+  {
+    "text": "My updated hoot text!"
+  }
+  
+}
