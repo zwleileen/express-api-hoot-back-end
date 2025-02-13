@@ -124,8 +124,8 @@ router.get("/:hootId", verifyToken, async (req, res) => {
 
 router.put("/:hootId/comments/:commentId", verifyToken, async (req, res) => {
   try {
-    const hoot = await Hoot.findById(req.params.hootId);
-    const comment = hoot.comments.id(req.params.commentId);
+    const hoot = await Hoot.findById(req.params.hootId); //findById not appropriate for subdocuments, only for separate documents with separate model
+    const comment = hoot.comments.id(req.params.commentId); //id() searches through the comments array in memory, it's not a Mongoose model database query like the findById()
 
     // ensures the current user is the author of the comment, comment.author retrieves the id only instead of both id and name since we populated it in .get because each route doesn't carry over to another route and when we retrieve the hoot doc, we always retrieve the raw one
     if (comment.author.toString() !== req.user._id) {
