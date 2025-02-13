@@ -1,16 +1,17 @@
 meta {
-  name: Create hoot comment
+  name: Update hoot comment
   type: http
-  seq: 10
+  seq: 11
 }
 
-post {
-  url: {{HOST}}/hoots/:hootId/comments
+put {
+  url: {{HOST}}/hoots/:hootId/comments/:commentId
   body: json
   auth: inherit
 }
 
 params:path {
+  commentId: 67ad569b72313a00e76cc75c
   hootId: 67ad55e472313a00e76cc750
 }
 

@@ -1,16 +1,17 @@
 meta {
-  name: Create hoot comment
+  name: Delete hoot comment
   type: http
-  seq: 10
+  seq: 12
 }
 
-post {
-  url: {{HOST}}/hoots/:hootId/comments
+delete {
+  url: {{HOST}}/hoots/:hootId/comments/:commentId
   body: json
   auth: inherit
 }
 
 params:path {
+  commentId: 67ad5dda36cda4c178eb3986
   hootId: 67ad55e472313a00e76cc750
 }
 

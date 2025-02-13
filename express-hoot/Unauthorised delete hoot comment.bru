@@ -1,0 +1,22 @@
+meta {
+  name: Unauthorised delete hoot comment
+  type: http
+  seq: 13
+}
+
+delete {
+  url: {{HOST}}/hoots/:hootId/comments/:commentId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  commentId: 67ac413962f62b649fa37736
+  hootId: 67ac3d4ddb6790b17bc56741
+}
+
+body:json {
+  {
+    "text": "my boring comment"
+  }
+}

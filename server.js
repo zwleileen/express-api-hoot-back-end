@@ -6,12 +6,12 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan");
-const hootsRouter = require("./controllers/hoots.js");
 
 // Import routers
 const authRouter = require("./controllers/auth");
 const testJwtRouter = require("./controllers/test-jwt");
 const usersRouter = require("./controllers/users");
+const hootsRouter = require("./controllers/hoots.js");
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI);
@@ -24,12 +24,12 @@ mongoose.connection.on("connected", () => {
 app.use(cors());
 app.use(express.json());
 app.use(logger("dev"));
-app.use("/hoots", hootsRouter);
 
 // Routes
 app.use("/auth", authRouter);
 app.use("/test-jwt", testJwtRouter);
 app.use("/users", usersRouter);
+app.use("/hoots", hootsRouter);
 
 // Start the server and listen on port 3000
 app.listen(3000, () => {
