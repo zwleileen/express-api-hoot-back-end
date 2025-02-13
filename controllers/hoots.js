@@ -31,14 +31,14 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
-router.get("/:hootId", verifyToken, async (req, res) => {
-  try {
-    const hoot = await Hoot.findById(req.params.hootId).populate("author");
-    res.status(200).json(hoot);
-  } catch (err) {
-    res.status(500).json({ err: err.message });
-  }
-});
+// router.get("/:hootId", verifyToken, async (req, res) => {
+//   try {
+//     const hoot = await Hoot.findById(req.params.hootId).populate("author");
+//     res.status(200).json(hoot);
+//   } catch (err) {
+//     res.status(500).json({ err: err.message });
+//   }
+// });
 
 router.put("/:hootId", verifyToken, async (req, res) => {
   try {
@@ -127,7 +127,7 @@ router.put("/:hootId/comments/:commentId", verifyToken, async (req, res) => {
     const hoot = await Hoot.findById(req.params.hootId);
     const comment = hoot.comments.id(req.params.commentId);
 
-    // ensures the current user is the author of the comment
+    // ensures the current user is the author of the comment, comment.author retrieves the id only instead of both id and name since we populated it in .get because each route doesn't carry over to another route and when we retrieve the hoot doc, we always retrieve the raw one
     if (comment.author.toString() !== req.user._id) {
       return res
         .status(403)
